@@ -1,8 +1,8 @@
-import {Client} from "discord.js";
 import interactionsCreate from './listeners/interactionsCreate';
 import ready from "./listeners/ready";
 import {Configuration, OpenAIApi} from "openai";
 
+const { Client, GatewayIntentBits } = require("discord.js");
 const dotenv = require("dotenv");
 
 console.log("Soma se réveille")
@@ -17,7 +17,10 @@ const configuration = new Configuration({
 export const openai = new OpenAIApi(configuration);
 
 const client = new Client({
-    intents: [],
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+    ]
 });
 
 client.login(discordToken).then(() => {
