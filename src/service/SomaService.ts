@@ -6,12 +6,12 @@ export class SomaService {
         try {
             const response = await openai.createCompletion({
                 model: "text-davinci-003",
-                temperature: 0,
-                top_p: 1,
-                frequency_penalty: 0.5,
+                echo: true,
+                temperature: 0.7,
+                frequency_penalty: -0.6,
                 presence_penalty: 0,
                 prompt: Train + " " + content,
-                max_tokens: 1000
+                max_tokens: 700,
             });
 
             return [response.data.choices[0].text, undefined];
