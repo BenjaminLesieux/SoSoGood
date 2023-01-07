@@ -3,6 +3,7 @@ import {CommandRegisterer} from "../Command";
 import {EmailCommand} from "../commands/email";
 import {FeelCommand} from "../commands/feel";
 import {MamacitaCommand} from "../commands/mamacitaCommand";
+import {AskCommand} from "../commands/ask";
 
 export default (client: Client): void => {
     client.on("ready", async () => {
@@ -12,7 +13,7 @@ export default (client: Client): void => {
 
         console.log("Chargement des commandes");
 
-        CommandRegisterer.registerCommands([EmailCommand, FeelCommand, MamacitaCommand]);
+        CommandRegisterer.registerCommands([EmailCommand, FeelCommand, MamacitaCommand, AskCommand]);
         console.log(CommandRegisterer.getCommands)
         await client.application.commands.set(CommandRegisterer.getCommands);
 
