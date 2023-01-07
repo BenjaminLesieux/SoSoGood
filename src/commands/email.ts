@@ -30,7 +30,7 @@ export const EmailCommand: Command = {
             top_p: 1,
             frequency_penalty: 0.5,
             presence_penalty: 0,
-            prompt: `écrit un long email destiné aux élèves d'une école d'ingénieur en soliloque dans un ancien français avec un ton accusateur sur le thème ${prompt.value}`,
+            prompt: `écrit un long message destiné en soliloque dans un français soutenu sur le thème suivant : ${prompt.value}`,
             max_tokens: 1000
         });
 
