@@ -1,6 +1,7 @@
 import {Command} from "../Command";
 import {Client, CommandInteraction} from "discord.js";
 import {openai, Train} from "../main";
+import {SomaService} from "../service/SomaService";
 
 export const AskCommand: Command = {
     name: "ask",
@@ -24,16 +25,15 @@ export const AskCommand: Command = {
 
         await interaction.deferReply();
 
-        const response = await openai.createCompletion({
-            model: "text-davinci-003",
-            temperature: 0,
-            top_p: 1,
-            frequency_penalty: 0.5,
-            presence_penalty: 0,
-            prompt: `${Train} Peux-tu répondre à la demande chatgpt suivante : ${question.value}`,
-            max_tokens: 1000
-        });
+        const [data, error] = await SomaService.prompt(
+            `Peux-tu répondre à la demande chatgpt suivante : ${question.value}`
+        );
 
-        await interaction.editReply(response.data.choices[0].text);
+        if (error) {
+            await interaction.editReply("Une erreur m'a empêchée de converser avec mon intellect.");
+            return;
+        }
+
+        if (data) await interaction.editReply(data);
     }
 }
