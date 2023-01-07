@@ -1,6 +1,6 @@
 import {Command} from "../Command";
 import {Client, CommandInteraction} from "discord.js";
-import {openai} from "../main";
+import {openai, Train} from "../main";
 
 export const EmailCommand: Command = {
     name: "email",
@@ -22,7 +22,7 @@ export const EmailCommand: Command = {
 
         if (!prompt || !prompt.value) return;
 
-        await interaction.reply("je compose...ce message sera modifié lorsque j'aurai fini de converser avec mon intellect...");
+        await interaction.deferReply();
 
         const response = await openai.createCompletion({
             model: "text-davinci-003",
@@ -30,11 +30,10 @@ export const EmailCommand: Command = {
             top_p: 1,
             frequency_penalty: 0.5,
             presence_penalty: 0,
-            prompt: `écrit un long message destiné en soliloque dans un français soutenu sur le thème suivant : ${prompt.value}`,
+            prompt: `${Train} Ecrit un long message destiné en soliloque dans un français soutenu sur le thème suivant : ${prompt.value}`,
             max_tokens: 1000
         });
 
         await interaction.editReply(response.data.choices[0].text ?? "error");
-        console.log(response.data.choices[0].text);
     }
 };

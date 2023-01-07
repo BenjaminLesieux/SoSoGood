@@ -1,6 +1,6 @@
 import {Command} from "../Command";
 import {Client, CommandInteraction} from "discord.js";
-import {openai} from "../main";
+import {openai, Train} from "../main";
 
 export const MamacitaCommand: Command = {
     name: "mamacita",
@@ -28,7 +28,7 @@ export const MamacitaCommand: Command = {
 
         if (!prompt || !prompt.value) return;
 
-        await interaction.reply("voyons ce que mon esprit pense de: " + prompt.value + "...");
+        await interaction.deferReply();
 
         const response = await openai.createCompletion({
             model: "text-davinci-003",
@@ -36,11 +36,10 @@ export const MamacitaCommand: Command = {
             top_p: 1,
             frequency_penalty: 0.5,
             presence_penalty: 0,
-            prompt: `Tu es une personne qui ne parle qu'en français soutenu. Complimente le plus possible une personne s'appellant ${prompt.value} avec la qualité suivante ${quality.value}.`,
-            max_tokens: 500
+            prompt: `${Train} Complimente le plus possible une personne s'appellant ${prompt.value} avec la qualité suivante ${quality.value}.`,
+            max_tokens: 1000
         });
 
         await interaction.editReply(response.data.choices[0].text ?? "error");
-        console.log(response.data.choices[0].text);
     }
 }

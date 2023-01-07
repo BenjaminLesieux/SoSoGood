@@ -1,6 +1,6 @@
 import {Command} from "../Command";
 import {Client, CommandInteraction} from "discord.js";
-import {openai} from "../main";
+import {openai, Train} from "../main";
 
 export const AskCommand: Command = {
     name: "ask",
@@ -22,7 +22,7 @@ export const AskCommand: Command = {
 
         if (!question || !question.value) return;
 
-        await interaction.reply("voyons ce que mon esprit pense de: " + question.value + "...");
+        await interaction.deferReply();
 
         const response = await openai.createCompletion({
             model: "text-davinci-003",
@@ -30,11 +30,10 @@ export const AskCommand: Command = {
             top_p: 1,
             frequency_penalty: 0.5,
             presence_penalty: 0,
-            prompt: `En parlant dans un ancien français. Peux-tu répondre à la demande chatgpt suivante : ${question.value}`,
-            max_tokens: 500
+            prompt: `${Train} Peux-tu répondre à la demande chatgpt suivante : ${question.value}`,
+            max_tokens: 1000
         });
 
-        await interaction.editReply(response.data.choices[0].text ?? "error");
-        console.log(response.data.choices[0].text);
+        await interaction.editReply(response.data.choices[0].text);
     }
 }

@@ -11,6 +11,8 @@ dotenv.config();
 const discordToken = process.env.DISCORD_TOKEN;
 const openAPIToken = process.env.OPENAPI_KEY;
 
+export const Train = "En t'addressant comme si c'était un discours et utilise un maximum de figure de style.";
+
 const configuration = new Configuration({
     apiKey: openAPIToken,
 });
