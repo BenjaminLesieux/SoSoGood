@@ -6,9 +6,8 @@ export class SomaService {
         try {
             const response = await openai.createCompletion({
                 model: "text-davinci-003",
-                echo: true,
                 temperature: 0.7,
-                frequency_penalty: -0.6,
+                frequency_penalty: 0.6,
                 presence_penalty: 0,
                 prompt: Train + " " + content,
                 max_tokens: 700,
