@@ -22,19 +22,6 @@ export const DrunkifyCommand: Command = {
 
         if (!message || !message.value) return;
 
-        await interaction.deferReply();
-
-        const [data, error] = await SomaService.prompt(
-            `Réécris le message suivant "${message.value}" comme quelqu'un qui est ivre, qui n'arrive plus à écrire, avec un orthographe douteux`,
-            100,
-            false
-        );
-
-        if (error) {
-            await interaction.editReply("Une erreur m'a empêchée de converser avec mon intellect.");
-            return;
-        }
-
-        if (data) await interaction.editReply(data);
+        await interaction.reply(SomaService.drunkify(message.value as string));
     }
 }

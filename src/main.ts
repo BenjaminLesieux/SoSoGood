@@ -1,6 +1,7 @@
 import interactionsCreate from './listeners/interactionsCreate';
 import ready from "./listeners/ready";
 import {Configuration, OpenAIApi} from "openai";
+import {SomaService} from "./service/SomaService";
 
 const { Client, GatewayIntentBits } = require("discord.js");
 const dotenv = require("dotenv");
@@ -26,6 +27,7 @@ const client = new Client({
 });
 
 client.login(discordToken).then(() => {
+    SomaService.drunkify("Je suis bourré");
     ready(client);
     interactionsCreate(client);
 });

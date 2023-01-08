@@ -19,4 +19,36 @@ export class SomaService {
             return [undefined, e];
         }
     }
+
+    static drunkify(content: string) {
+        let randomizer = Math.random();
+
+        const words = content.split("");
+        const charsMap = words.map((word) => word.charCodeAt(0));
+        const translatedCharsMap = [];
+
+        const forbiddenChars = ["(", ")", "?", "!"];
+
+        charsMap.forEach((char, index) => {
+            if (forbiddenChars.includes(String.fromCharCode(char))) {
+                translatedCharsMap.push(char);
+            }
+
+            else if (randomizer <= 0.16)
+                translatedCharsMap.push(this.shift(char));
+            else if (randomizer > 0.16 && randomizer <= 0.32) {
+                translatedCharsMap.push(char, char);
+            }
+            else translatedCharsMap.push(char);
+
+            randomizer = Math.random();
+        });
+
+        const translatedWords = translatedCharsMap.map((char) => String.fromCharCode(char));
+        return translatedWords.join("");
+    }
+
+    private static shift(char: number) {
+        return char + Math.floor(Math.random() * 2);
+    }
 }
