@@ -5,6 +5,7 @@ import {FeelCommand} from "../commands/feel";
 import {MamacitaCommand} from "../commands/mamacitaCommand";
 import {AskCommand} from "../commands/ask";
 import {ClassCommand} from "../commands/class";
+import {DrunkifyCommand} from "../commands/drunkify";
 
 export default (client: Client): void => {
     client.on("ready", async () => {
@@ -19,7 +20,8 @@ export default (client: Client): void => {
             FeelCommand,
             MamacitaCommand,
             AskCommand,
-            ClassCommand
+            ClassCommand,
+            DrunkifyCommand
         ]);
         console.log(CommandRegisterer.getCommands)
         await client.application.commands.set(CommandRegisterer.getCommands);
