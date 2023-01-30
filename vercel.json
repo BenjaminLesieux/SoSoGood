@@ -1,0 +1,10 @@
+{
+  "version": 1.0,
+  "name": "SomaBot",
+  "builds": [
+    { "src": "main.ts", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/main.ts" }
+  ]
+}
