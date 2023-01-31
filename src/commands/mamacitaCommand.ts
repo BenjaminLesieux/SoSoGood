@@ -5,7 +5,7 @@ import {SomaService} from "../service/SomaService";
 
 export const MamacitaCommand: Command = {
     name: "mamacita",
-    description: "demendez l'avis de soma sur une daronne (ou un daron)",
+    description: "demandez l'avis de soma sur une daronne (ou un daron)",
     type: 1, // chat input,
     options: [{
         name: "personne",
